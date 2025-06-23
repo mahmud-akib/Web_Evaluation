@@ -9,18 +9,20 @@
         th,
         td {
             border: 1px solid black;
+            
             border-collapse: collapse;
             padding: 8px;
         }
 
         form {
             margin: 10px 0;
+            
         }
     </style>
 </head>
 
 <body>
-    <h2>Student Table</h2>
+    <h2>Table</h2>
     <table id="studentTable">
         <thead>
             <tr>
@@ -43,7 +45,6 @@
         </tbody>
     </table>
 
-
     <h3>Add New Student</h3>
     <form id="addForm">
         Name: <input type="text" id="addName" required />
@@ -57,7 +58,7 @@
 
     <h3>Modify Data</h3>
     <form id="modifyForm">
-        Row Number : <input type="number" id="rowIndex" required />
+        Row Number: <input type="number" id="rowIndex" required />
         <br>
         Column (name/id/marks): <input type="text" id="columnName" required />
         <br>
@@ -65,7 +66,6 @@
         <br>
         <button type="submit">Modify</button>
     </form>
-
 
     <script>
         const table = document.getElementById("studentTable").getElementsByTagName("tbody")[0];
@@ -77,6 +77,23 @@
             const marks = document.getElementById("addMarks").value;
             const newRow = table.insertRow();
             newRow.innerHTML = `<td>${name}</td><td>${id}</td><td>${marks}</td>`;
+            this.reset();
+        });
+
+        document.getElementById("modifyForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const rowIndex = parseInt(document.getElementById("rowIndex").value);
+            const column = document.getElementById("columnName").value.toLowerCase();
+            const newValue = document.getElementById("newValue").value;
+            const colMap = { name: 0, id: 1, marks: 2 };
+
+            if (table.rows[rowIndex] && colMap.hasOwnProperty(column)) {
+                table.rows[rowIndex].cells[colMap[column]].innerText = newValue;
+                alert("Updated The Value");
+            } else {
+                alert("Invalid row or column.");
+            }
+
             this.reset();
         });
     </script>
