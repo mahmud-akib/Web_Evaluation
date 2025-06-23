@@ -87,6 +87,25 @@
   
             this.reset();
         });
+        document.getElementById("modifyForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const rowIndex = parseInt(document.getElementById("rowIndex").value);
+  const column = document.getElementById("columnName").value.toLowerCase();
+  const colMap = { name: 0, id: 1, marks: 2 };
+
+  if (table.rows[rowIndex] && colMap.hasOwnProperty(column)) {
+    // Show a popup to get new value
+    const newValue = prompt(`Enter new value for ${column}:`);
+    if (newValue !== null) {
+      table.rows[rowIndex].cells[colMap[column]].innerText = newValue;
+    }
+  } else {
+    alert("Invalid row or column.");
+  }
+
+  this.reset();
+});
+
     </script>
 </body>
 
