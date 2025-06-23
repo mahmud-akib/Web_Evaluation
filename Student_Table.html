@@ -59,35 +59,7 @@
         <button type="submit">Modify</button>
     </form>
 
-    <script>
-        const table = document.getElementById("studentTable").getElementsByTagName("tbody")[0];
-
-        document.getElementById("addForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const name = document.getElementById("addName").value;
-            const id = document.getElementById("addId").value;
-            const marks = document.getElementById("addMarks").value;
-            const newRow = table.insertRow();
-            newRow.innerHTML = `<td>${name}</td><td>${id}</td><td>${marks}</td>`;
-            this.reset();
-        });
-
-        document.getElementById("modifyForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const rowIndex = parseInt(document.getElementById("rowIndex").value);
-            const column = document.getElementById("columnName").value.toLowerCase();
-            const newValue = document.getElementById("newValue").value;
-            const colMap = { name: 0, id: 1, marks: 2 };
-
-            if (table.rows[rowIndex] && colMap.hasOwnProperty(column)) {
-                table.rows[rowIndex].cells[colMap[column]].innerText = newValue;
-            } else {
-                alert("Invalid row or column.");
-            }
-
-            this.reset();
-        });
-    </script>
+   
 </body>
 
 </html>
